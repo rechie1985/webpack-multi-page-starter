@@ -1,5 +1,3 @@
-### webpack项目脚手架
+### webpack多页面项目脚手架
 
-#### loader
-- sass-loader
-- 
+#### 待添加
