@@ -1,0 +1,140 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$i-arrow-down-name: 'i-arrow-down';
+$i-arrow-down-x: 0px;
+$i-arrow-down-y: 0px;
+$i-arrow-down-offset-x: 0px;
+$i-arrow-down-offset-y: 0px;
+$i-arrow-down-width: 200px;
+$i-arrow-down-height: 200px;
+$i-arrow-down-total-width: 248px;
+$i-arrow-down-total-height: 200px;
+$i-arrow-down-image: '/practice/webpack-starter/dist/imgs/sprites.png';
+$i-arrow-down: (0px, 0px, 0px, 0px, 200px, 200px, 248px, 200px, '/practice/webpack-starter/dist/imgs/sprites.png', 'i-arrow-down', );
+$i-arrow-right-name: 'i-arrow-right';
+$i-arrow-right-x: 200px;
+$i-arrow-right-y: 48px;
+$i-arrow-right-offset-x: -200px;
+$i-arrow-right-offset-y: -48px;
+$i-arrow-right-width: 44px;
+$i-arrow-right-height: 44px;
+$i-arrow-right-total-width: 248px;
+$i-arrow-right-total-height: 200px;
+$i-arrow-right-image: '/practice/webpack-starter/dist/imgs/sprites.png';
+$i-arrow-right: (200px, 48px, -200px, -48px, 44px, 44px, 248px, 200px, '/practice/webpack-starter/dist/imgs/sprites.png', 'i-arrow-right', );
+$i-key-name: 'i-key';
+$i-key-x: 200px;
+$i-key-y: 123px;
+$i-key-offset-x: -200px;
+$i-key-offset-y: -123px;
+$i-key-width: 38px;
+$i-key-height: 17px;
+$i-key-total-width: 248px;
+$i-key-total-height: 200px;
+$i-key-image: '/practice/webpack-starter/dist/imgs/sprites.png';
+$i-key: (200px, 123px, -200px, -123px, 38px, 17px, 248px, 200px, '/practice/webpack-starter/dist/imgs/sprites.png', 'i-key', );
+$i-user-name: 'i-user';
+$i-user-x: 200px;
+$i-user-y: 92px;
+$i-user-offset-x: -200px;
+$i-user-offset-y: -92px;
+$i-user-width: 25px;
+$i-user-height: 31px;
+$i-user-total-width: 248px;
+$i-user-total-height: 200px;
+$i-user-image: '/practice/webpack-starter/dist/imgs/sprites.png';
+$i-user: (200px, 92px, -200px, -92px, 25px, 31px, 248px, 200px, '/practice/webpack-starter/dist/imgs/sprites.png', 'i-user', );
+$u76-name: 'u76';
+$u76-x: 200px;
+$u76-y: 0px;
+$u76-offset-x: -200px;
+$u76-offset-y: 0px;
+$u76-width: 48px;
+$u76-height: 48px;
+$u76-total-width: 248px;
+$u76-total-height: 200px;
+$u76-image: '/practice/webpack-starter/dist/imgs/sprites.png';
+$u76: (200px, 0px, -200px, 0px, 48px, 48px, 248px, 200px, '/practice/webpack-starter/dist/imgs/sprites.png', 'u76', );
+$spritesheet-width: 248px;
+$spritesheet-height: 200px;
+$spritesheet-image: '/practice/webpack-starter/dist/imgs/sprites.png';
+$spritesheet-sprites: ($i-arrow-down, $i-arrow-right, $i-key, $i-user, $u76, );
+$spritesheet: (248px, 200px, '/practice/webpack-starter/dist/imgs/sprites.png', $spritesheet-sprites, );
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

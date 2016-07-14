@@ -1,0 +1,32 @@
+@import './sprite.scss';
+h1,
+h2,
+h3,
+h4{
+  padding-left: 100px;
+}
+h1:before{
+  content: '';
+  display:block;
+  @include sprite($i-user);
+}
+h2:before{
+  content: '';
+  display:block;
+  @include sprite($i-arrow-down);
+}
+h3:before{
+  content: '';
+  display:block;
+  @include sprite($i-arrow-right);
+}
+h4:before{
+  content: '';
+  display:block;
+  @include sprite($i-key);
+}
+h5:before{
+  content: '';
+  display:block;
+  @include sprite($u76);
+}
