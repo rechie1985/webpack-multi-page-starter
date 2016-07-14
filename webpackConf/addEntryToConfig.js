@@ -17,7 +17,7 @@ function addEntryToConfig(config, isDev) {
     var chunkName = dir + path.sep + filename;
     var chunkDir = './src/js' + chunkName + '.js';
     var entryName = chunkName.replace('/', '');
-    config.entry[entryName] = isDev ? [chunkDir, hotMiddlewareScript] : [chunkDir];
+    config.entry[entryName] = isDev ? [chunkDir, "webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server"] : [chunkDir];
 
 
     // 给每一个入口文件都增加HtmlWebpackPlugin配置
